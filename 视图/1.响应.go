@@ -57,7 +57,9 @@ func _redirect(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	//加载目录下的所有模版文件
+	//加载目录下的所有模版文件例如index.html,index2.html
+	//这样就可以使用HTML样式的模版
+	//例如下边的c.HTML就是使用html模版
 	router.LoadHTMLGlob("./templates/*")
 
 	//选择可以下载的路径
