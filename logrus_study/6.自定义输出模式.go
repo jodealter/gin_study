@@ -55,7 +55,7 @@ func (f Myformater) Format(entry *logrus.Entry) ([]byte, error) {
 		b = entry.Buffer
 	}
 	//自定义时间输出格式
-	format_time := entry.Time.Format(f.TimeFormat)
+	formatTime := entry.Time.Format(f.TimeFormat)
 
 	//这个是自定义输出行号格式
 	//第一个参数是指定文件，第二个参数指定行号
@@ -64,7 +64,7 @@ func (f Myformater) Format(entry *logrus.Entry) ([]byte, error) {
 	//这个与上边这个相比加上了path.base ,效果就是只输出路径不一样的地方，去除相同的前缀
 	fileval := fmt.Sprintf("%s:%d", path.Base(entry.Caller.File), entry.Caller.Line)
 
-	fmt.Fprintf(b, "[%s] \033[3%dm[%s]\033[0m [%s] %s %s\n", f.Prefix, color, entry.Level, format_time, fileval, entry.Message)
+	fmt.Fprintf(b, "[%s] \033[3%dm[%s]\033[0m [%s] %s %s\n", f.Prefix, color, entry.Level, formatTime, fileval, entry.Message)
 	return b.Bytes(), nil
 }
 
