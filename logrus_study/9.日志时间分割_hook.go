@@ -33,7 +33,7 @@ func (hook FileDateHook) Fire(entry *logrus.Entry) error {
 	return nil
 }
 func InitFile(logPath, appName string) {
-	fileDate := time.Now().Format("2006-01-02-12-04")
+	fileDate := time.Now().Format("2006-01-02-15-04")
 	err := os.MkdirAll(fmt.Sprintf("%s/%s", logPath, fileDate), os.ModePerm)
 	if err != nil {
 		logrus.Error(err)
@@ -59,6 +59,7 @@ func main() {
 		logrus.Warn("ruler")
 
 		time.Sleep(20 * time.Second)
+
 		logrus.Error("alter")
 	}
 }

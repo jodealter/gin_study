@@ -21,7 +21,7 @@ func LogMiddleware() gin.HandlerFunc {
 		if raw != "" {
 			path = path + "?" + raw
 		}
-		logrus.Infof("[GIN] %s | %d | %d | %s | %s |%s",
+		logrus.Print("[GIN] %s | %d | %d | %s | %s |%s",
 			start.Format("2006-01-02 12:34:02"),
 			statusCode,
 			timesub,

@@ -55,12 +55,12 @@ func (f Myformater) Format(entry *logrus.Entry) ([]byte, error) {
 		b = entry.Buffer
 	}
 
-	fmt.Fprintf(b, "%s", entry.Message)
+	//fmt.Fprintf(b, "%s", entry.Message)
 	return b.Bytes(), nil
 }
 
 func InitFile(logPath, appName string) {
-	logrus.SetFormatter(&Myformater{})
+	//logrus.SetFormatter(&Myformater{})
 	fileDate := time.Now().Format("2006-01-02_12-04")
 	err := os.MkdirAll(fmt.Sprintf("%s/%s", logPath, fileDate), os.ModePerm)
 	if err != nil {

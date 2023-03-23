@@ -57,7 +57,7 @@ func InitLevel(logpath string) {
 	logrus.AddHook(&files)
 }
 func main() {
-	InitLevel("logrus_study/log_")
+	InitLevel("logrus_study/fate_log_level")
 	logrus.Error("err")
 	logrus.Warnln("warn")
 	logrus.Info("info")

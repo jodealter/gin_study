@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/sirupsen/logrus"
+	"io"
+	"os"
 	"path"
 )
 
@@ -78,7 +80,12 @@ func main() {
 	//自定义输出格式的好处灵活，很多参数可以通过结构体的方式来定义自己的输出格式
 	//只要实现这个方法签名的就可以作为格式被填进去
 	logrus.SetFormatter(&Myformater{"2006-01-02 05:06:07", "GROM"})
-
+	file, err := os.OpenFile("./logrus_study1/log.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0755)
+	if err != nil {
+		logrus.Errorln(err.Error())
+		return
+	}
+	logrus.SetOutput(io.MultiWriter(os.Stdout, file))
 	//这里的日志实际上是去调用上边的这个格式
 	logrus.Errorln("nihao")
 	logrus.Warnln("nihao")

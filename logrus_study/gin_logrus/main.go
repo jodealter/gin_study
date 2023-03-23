@@ -1,15 +1,13 @@
 package main
 
 import (
-	"gin_study/logrus_study/gin_logrus/log"
 	"gin_study/logrus_study/gin_logrus/middleware"
-	"github.com/sirupsen/logrus"
-
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
-	log.InitFile("logrus_study/gin_logrus/logs", "fate")
+	//log.InitFile("logrus_study/gin_logrus/logs", "fate")
 	router := gin.New()
 	router.Use(middleware.LogMiddleware())
 	router.GET("/", func(c *gin.Context) {
