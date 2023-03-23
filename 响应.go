@@ -32,10 +32,11 @@ func main() {
 	//这个类似于上边的，但是不是目录而是文件
 	router.StaticFile("/jode", "static/jode.png")
 
+	//没试成功
 	//这个是如果路径匹配"/jodealter"前缀，则会优先在static这个路径下查找文件
-	router.Static("/jodealter", "static")
+	// router.Static("/jode.png", "/jode")
 
-	router.StaticFileFS("/jodealter.png", "static/jodealter.png", http.Dir("."))
+	router.StaticFileFS("/jodealter.png", "jode.png", http.Dir("./static"))
 
 	router.Run(":8080")
 }

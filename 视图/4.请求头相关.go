@@ -35,5 +35,8 @@ func main() {
 		c.Header("Content-Type", "application/text; charset=utf-8")
 		c.JSON(200, gin.H{"serv": "jode"})
 	})
-	router.Run(":80")
+	err := router.Run(":80")
+	if err != nil {
+		return
+	}
 }

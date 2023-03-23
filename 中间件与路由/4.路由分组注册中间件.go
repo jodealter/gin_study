@@ -31,6 +31,7 @@ func Middleware(msg string) gin.HandlerFunc {
 		c.Abort()
 	}
 }
+
 func _UserListView(c *gin.Context) {
 
 	var userList []_UserInfo = []_UserInfo{{"kds", 22}, {"jode", 22}}

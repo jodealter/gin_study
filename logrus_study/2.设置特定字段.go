@@ -13,6 +13,7 @@ func main() {
 	//设置输出格式，两种json和text
 	//logrus.SetFormatter(&logrus.JSONFormatter{})
 	logrus.SetFormatter(&logrus.TextFormatter{
+		//设置颜色的
 		ForceColors: true,
 	})
 

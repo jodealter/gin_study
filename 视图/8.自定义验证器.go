@@ -7,6 +7,8 @@ import (
 	"reflect"
 )
 
+//参数错误信息指的是这个字段出错的时候，放出来的，验证器是限制这个字段的东西
+
 func _GetVaildMsg(err error, user any) string {
 	getObj := reflect.TypeOf(user) //将err接口断言为具体类型
 	if errs, ok := err.(validator.ValidationErrors); ok {
@@ -26,6 +28,7 @@ type User struct {
 	Age  int    `json:"age" binding:"required" msg:"请输入年龄"`
 }
 
+// 返回true 就代表验证通过
 func signValid(fl validator.FieldLevel) bool {
 	var nameList []string = []string{"kds", "jode"}
 	for _, nameStr := range nameList {
@@ -36,10 +39,16 @@ func signValid(fl validator.FieldLevel) bool {
 	}
 	return true
 }
+
 func main() {
 	router := gin.Default()
+
+	//这个ok检验的不是engine这个函数，而是他的返回值被断言成*validator.Validate是否会成功
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
-		v.RegisterValidation("sign", signValid)
+		err := v.RegisterValidation("sign", signValid)
+		if err != nil {
+			return
+		}
 	}
 	router.POST("/", func(c *gin.Context) {
 		var user User
@@ -50,5 +59,8 @@ func main() {
 		}
 		c.JSON(200, gin.H{"data": user})
 	})
-	router.Run(":80")
+	err := router.Run(":80")
+	if err != nil {
+		return
+	}
 }

@@ -104,6 +104,8 @@ func main() {
 	router.POST("/articles", _create)       //新建文章
 	router.PUT("/articles/:id", _update)    //更新文章
 	router.DELETE("/articles/:id", _delete) //删除文章
-
-	router.Run(":80")
+	err := router.Run(":80")
+	if err != nil {
+		return
+	}
 }

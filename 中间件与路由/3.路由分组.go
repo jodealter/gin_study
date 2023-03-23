@@ -39,7 +39,7 @@ func UserInit(router *gin.RouterGroup) {
 	{
 		//访问这个路径 是/api/user_manager/users
 		userManager.GET("/users", UserListView)
-		userManager.GET("user", UserListView)
+		userManager.GET("/user", UserListView)
 	}
 }
 func ArticleInit(router *gin.RouterGroup) {

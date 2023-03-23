@@ -20,6 +20,7 @@ func main() {
 		}
 		c.JSON(200, user)
 	})
+
 	router.POST("/query", func(context *gin.Context) {
 		var user UserInfo
 		err := context.ShouldBindQuery(&user)
@@ -50,6 +51,9 @@ func main() {
 		}
 		c.JSON(200, user)
 	})
-	router.Run(":80")
+	err := router.Run(":80")
+	if err != nil {
+		return
+	}
 
 }

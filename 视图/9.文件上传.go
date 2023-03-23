@@ -23,12 +23,23 @@ func main() {
 
 		//注意这里的readall与io.copy 都会读取文件内容(这里就是fileheader)，但是只能读一遍，第二遍就不能读了(可能有一个指针指向了末尾)
 		file, _ := fileheader.Open()
+
+		//这个目录相对 "9.文件上传.go" 来算的
 		dst := "./" + fileheader.Filename
 
 		//create 已经m默认打开了文件，所以需要关闭
 		out, _ := os.Create(dst)
-		defer out.Close()
-		io.Copy(out, file)
+		defer func(out *os.File) {
+			err := out.Close()
+			if err != nil {
+
+			}
+		}(out)
+		num, err := io.Copy(out, file)
+		if err != nil {
+			return
+		}
+		fmt.Println(num)
 		data, _ := io.ReadAll(file)
 		fmt.Println(string(data))
 		c.JSON(200, gin.H{"msg": "上传成功"})
@@ -39,9 +50,15 @@ func main() {
 		form, _ := c.MultipartForm()
 		files := form.File["upload[]"]
 		for _, file := range files {
-			c.SaveUploadedFile(file, "./upload/"+file.Filename)
+			err := c.SaveUploadedFile(file, "./upload/"+file.Filename)
+			if err != nil {
+				return
+			}
 		}
 		c.JSON(200, gin.H{"msg": "上传成功"})
 	})
-	router.Run(":80")
+	err := router.Run(":80")
+	if err != nil {
+		return
+	}
 }

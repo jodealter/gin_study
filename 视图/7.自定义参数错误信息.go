@@ -28,7 +28,7 @@ func main() {
 	router := gin.Default()
 	router.POST("/", func(c *gin.Context) {
 		type User struct {
-			Name string `json:"name" binding:"required" msg:"请输入用户名"`
+			Name string `json:"name" binding:"required,gt=4" msg:"请输入用户名"`
 			Age  int    `json:"age" binding:"required" msg:"请输入年龄"`
 		}
 		var user User

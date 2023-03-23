@@ -31,6 +31,7 @@ func m11(c *gin.Context) {
 	c.Next()
 	fmt.Println("m11 ...out")
 }
+
 func main() {
 	router := gin.Default()
 	//全局中间件指的是无论用户用哪个路径进行访问，都会处罚这几个中间件
